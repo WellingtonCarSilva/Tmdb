@@ -1,0 +1,34 @@
+﻿.movie-card {
+    font: 14px/22px "Lato", Arial, sans-serif;
+    color: #A9A8A3;
+    padding: 40px 0;
+}
+
+.container {
+    margin: 0 auto;
+    width: 1030px;
+    height: auto;
+    background: #F0F0ED;
+    border-radius: 5px;
+    position: relative;
+}
+
+.cover {
+    position: absolute;
+    top: 70px;
+    left: 40px;
+    z-index: 2;
+    width: 200px;
+}
+
+.details {
+    padding: 50px 0 0 280px;
+}
+
+.description {
+    height: auto;
+    min-height: 250px;
+    font-size: 16px;
+    line-height: 26px;
+    color: #B1B0AC;
+}
