@@ -30,6 +30,15 @@ namespace TMDB.web.Models
         [DataMember(Name = "release_date")]
         public DateTime ReleaseDate { get; set; }
 
+        [DataMember(Name = "release_date_format")]
+        public string ReleaseDateFormat
+        {
+            get
+            {
+                return ReleaseDate.ToString("dd MMMM / yy");
+            }
+        }
+
         [DataMember(Name = "vote_average")]
         public double VoteAverage { get; set; }
     }

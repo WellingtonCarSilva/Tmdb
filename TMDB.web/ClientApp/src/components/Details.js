@@ -9,8 +9,7 @@ export class Details extends Component {
             movie: {}, loading: true
         };
 
-        const search = this.props.location.search;
-        const params = new URLSearchParams(search);
+        const params = new URLSearchParams(this.props.location.search);
         const id = params.get('id');
 
         fetch(`api/Movies/Details?id=${ id }`)
@@ -30,7 +29,8 @@ export class Details extends Component {
 
                         <div className="details">
                             <h2>{movie.title}</h2>
-                            <span className="glyphicon glyphicon-star"> </span> {movie.voteAverage - movie.releaseDate}
+                            <span className="glyphicon glyphicon-star"> </span>
+                            {movie.vote_average + " - " + movie.release_date_format}
                             <div className="description">
                                 <p>{movie.overview}</p>
                             </div>

@@ -28,11 +28,13 @@ namespace TMDB.web.Api
         /// <summary>
         /// Próxima página.
         /// </summary>
+        [DataMember(Name = "next_page")]
         public int NextPage { get { return PageNumber + 1; } }
 
         /// <summary>
         /// Página anterior.
         /// </summary>
+        [DataMember(Name = "prev_page")]
         public int PrevPage { get { return PageNumber - 1; } }
 
         /// <summary>

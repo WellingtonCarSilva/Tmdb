@@ -9,7 +9,18 @@ export class Showcase extends Component {
             movies: {}, loading: true
         };
 
-        fetch('api/Movies/Upcoming')
+        var url = 'api/Movies/Upcoming';
+
+        if (this.props.location !== undefined) {
+            const params = new URLSearchParams(this.props.location.search);
+
+            const pageNumber = params.get('pageNumber');
+
+            url = `api/Movies/Upcoming?pageNumber=${pageNumber}`;
+        }
+        console.log(url);
+
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 this.setState({ movies: data, loading: false });
@@ -31,8 +42,8 @@ export class Showcase extends Component {
                                         <h1>{movie.title}</h1>
                                         <div className='card_right__details'>
                                             <ul>
-                                                <li>{movie.releaseDate}</li>
-                                                <li><span className="glyphicon glyphicon-star"> </span> {movie.voteAverage}</li>
+                                                <li>{movie.release_date_format}</li>
+                                                <li><span className="glyphicon glyphicon-star"> </span> {movie.vote_average}</li>
                                             </ul>
                                         </div>
                                         <div className='card_right__review'>
@@ -46,12 +57,12 @@ export class Showcase extends Component {
                     </div>
                 </div>
                 <div className="container-fluid text-center">
-                    <a asp-page="" asp-route-pageNumber={movies.PrevPage} className="page-link">
-                        <button className="page-item">Anterior</button>
+                    <a href={"/Showcase?pageNumber=" + movies.prev_page}>
+                        <button className="page-item" disabled={movies.prev_page == 0} >Anterior</button>
                     </a>
-                    <a asp-page="" asp-route-pageNumber={movies.nextPage} className="page-link">
-                        <button className="page-item">Próxima</button>
-                    </a >
+                    <a href={"/Showcase?pageNumber=" + movies.next_page}>
+                        <button className="page-item" disabled={movies.next_page > movies.total_pages}>Próxima</button>
+                    </a>
                 </div>
             </div>
         )
