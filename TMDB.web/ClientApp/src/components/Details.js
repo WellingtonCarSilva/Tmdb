@@ -9,7 +9,11 @@ export class Details extends Component {
             movie: {}, loading: true
         };
 
-        fetch("api/Movies/Details?id=19404")
+        const search = this.props.location.search;
+        const params = new URLSearchParams(search);
+        const id = params.get('id');
+
+        fetch(`api/Movies/Details?id=${ id }`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ movie: data, loading: false });
