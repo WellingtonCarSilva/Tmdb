@@ -1,30 +1,30 @@
 ﻿import React, { Component } from 'react';
 import './Movie.css';
+import axios from "axios";
+
 
 export class Showcase extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            movies: {}, loading: true
+            movies: {}, loading: true, url: 'api/Movies/Upcoming'
         };
-
-        var url = 'api/Movies/Upcoming';
 
         if (this.props.location !== undefined) {
             const params = new URLSearchParams(this.props.location.search);
 
             const pageNumber = params.get('pageNumber');
+            this.state = {
+                movies: {}, loading: true, url: `api/Movies/Upcoming?pageNumber=${pageNumber}`
+            };
 
-            url = `api/Movies/Upcoming?pageNumber=${pageNumber}`;
-        }
-        console.log(url);
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ movies: data, loading: false });
+            fetch(this.state.url)
+                .then(response => response.json())
+                .then(data => {
+                    this.setState({ movies: data, loading: false });
             });
+        }
     }
 
     static renderMovies(movies) {
@@ -78,5 +78,12 @@ export class Showcase extends Component {
                 {contents}
             </div>
         );
+    }
+    async componentDidMount() {
+        if (this.state.url == 'api/Movies/Upcoming') {
+            console.log('oi');
+            const retorno = await axios.get(this.state.url);
+            this.setState({ movies: retorno.data, loading: false });
+        }
     }
 }
