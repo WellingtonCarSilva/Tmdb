@@ -48,7 +48,7 @@ export class Showcase extends Component {
                                         </div>
                                         <div className='card_right__review'>
                                             <p>{movie.overview.substring(0, movie.overview.length > 140 ? 140 : movie.overview.length)}...</p>
-                                            <a href={"../Details?id=" + movie.id} target='_blank'>Mais Informações</a>
+                                            <a href={"../Details?id=" + movie.id}>Mais Informações</a>
                                         </div>
                                     </div>
                                 </div>
